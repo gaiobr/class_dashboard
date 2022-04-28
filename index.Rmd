@@ -2,10 +2,13 @@
 title: "Advanced Dashboarding"
 output: 
   flexdashboard::flex_dashboard:
-    orientation: columns
+    orientation: row
     vertical_layout: fill
     social: ['menu']
     source_code: embed
+    theme: 
+      version: 4
+      bootswatch: sandstone
 ---
 
 ```{r setup, include=FALSE}
@@ -19,10 +22,27 @@ library(fontawesome)
 data('penguins')
 ```
 
-Plots
+Plots {data-navmenu='Pages'}
 =======================================================================
 
-Column {data-width=650}
+Sidebar {.sidebar}
+-----------------------------------------------------------------------
+
+### Penguin Stats
+
+The number of penguins in the data is `r nrow(penguins)` 
+
+Row 
+-----------------------------------------------------------------------
+
+### Number of Penguins
+
+```{r}
+valueBox(nrow(penguins), icon = 'fa-linux')
+```
+
+
+Column {.tabset}
 -----------------------------------------------------------------------
 
 ### Scatter plot of bill length vs bill depth
@@ -34,8 +54,7 @@ a <- penguins %>% ggplot(aes(x = bill_length_mm, y = bill_depth_mm, color = spec
 ggplotly(a)
 ```
 
-Column {data-width=350}
------------------------------------------------------------------------
+
 
 ### Chart B
 
@@ -52,7 +71,7 @@ penguins %>% ggplot(aes(x = flipper_length_mm, fill = species)) +
   facet_wrap(~species)
 ```
 
-Data
+Data {data-navmenu='Pages'}
 =======================================================================
 
 ```{r}
